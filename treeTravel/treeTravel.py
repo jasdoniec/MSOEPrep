@@ -1,7 +1,7 @@
 schematic = [];
 with open("9.txt", "r") as file:
     for line in file:
-        schematic.append(list(line.strip()))
+        schematic.append(list(line))
 
 def getPoint(x,y):
     return schematic[y][x];
@@ -13,9 +13,9 @@ def options(point):
     
     if getPoint(x,y) == "-" and getPoint(x+1, y) != "-":
         if getPoint(x,y+1) != " ":
-            out.append((d,1))
+            out.append(("d",1))
         elif getPoint(x,y+2)  == " ":
-            out.append((d,2))
+            out.append(("d",2))
         return out
 
     if getPoint(x,y) == "-" or getPoint(x,y) == "+":
@@ -30,7 +30,7 @@ def options(point):
         i = 1
         while(getPoint(x, y+i) == "|"):
             i+=1
-        if (getPoint(x,y+i) == "+" or getPoint(x+i,y) == "#"):
+        if (getPoint(x,y+i) == "+" or getPoint(x,y+i) == "#"):
             out.append(("d",i))
         elif getPoint(x,y+i) != "=":
             out.append(("d",i-1))
@@ -44,7 +44,7 @@ def options(point):
     return out
 
 def printDot(pos):
-    schematics[pos[1]][pos[0]] = "."
+    schematic[pos[1]][pos[0]] = "."
 
 
 currPos = (0,len(schematic)-7)
@@ -81,6 +81,7 @@ while True:
     if getPoint(currPos[0],currPos[1]) == "#":
         break;
     movements.append(options(currPos))
+    print("HI")
 
 currPos = (0,len(schematic)-7)
 
