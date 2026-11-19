@@ -24,7 +24,7 @@ def options(point):
             i+=1
         if (getPoint(x+i,y) == "+" or getPoint(x+i,y) == "#"):
             out.append(("f",i))
-        else:
+        elif i-1 > 0:
             out.append(("f",i-1))
     if getPoint(x,y) == "|" or getPoint(x,y) == "+":
         i = 1
@@ -32,14 +32,14 @@ def options(point):
             i+=1
         if (getPoint(x,y+i) == "+" or getPoint(x,y+i) == "#"):
             out.append(("d",i))
-        elif getPoint(x,y+i) != "=":
+        elif getPoint(x,y+i) != "=" and i-1 > 0:
             out.append(("d",i-1))
         i = 1
         while(getPoint(x, y-i) == "|"):
             i+=1
         if (getPoint(x,y-i) == "+"):
             out.append(("u",i))
-        else:
+        elif i-1 > 0:
             out.append(("u",i-1))
     return out
 
@@ -77,11 +77,11 @@ while True:
         y -= c
     else:
         x += c
-
+    currPos = (x,y)
     if getPoint(currPos[0],currPos[1]) == "#":
         break;
     movements.append(options(currPos))
-    print("HI")
+    print(currPos)
 
 currPos = (0,len(schematic)-7)
 
